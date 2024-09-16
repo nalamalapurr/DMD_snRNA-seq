@@ -35,6 +35,10 @@ df.bl6.genes<-rbind(df.bl6.genes,df.bl6.genes.add)
 
 df.bl6.genes.split<-split(df.bl6.genes$genes,f=df.bl6.genes$cluster)
 
+for (y in 1:25){
+  write.csv(df.bl6.genes.split[[y]], paste0(names(df.bl6.genes.split)[y],"_BL6_Upregulated_Genes.csv"))
+}
+
 geneid.bl6 <- df.bl6.genes.split %>% map(~{
   
   gene.df <- select(org.Mm.eg.db,
@@ -185,6 +189,11 @@ df.mdx.genes<-rbind(df.mdx.genes,df.mdx.genes.add)
 }
 
 df.mdx.genes.split<-split(df.mdx.genes$genes,f=df.mdx.genes$cluster)
+
+for (y in 1:25){
+  write.csv(df.mdx.genes.split[[y]], paste0(names(df.mdx.genes.split)[y],"_MDX_Upregulated_Genes.csv"))
+}
+
 
 geneid.mdx <- df.mdx.genes.split %>% map(~{
   
