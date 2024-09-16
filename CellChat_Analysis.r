@@ -88,19 +88,13 @@ png(file="CellChat_Interactions.png", width=1000, height=1000)
 gg1_n+gg2_n
 dev.off()
 
-png(file="CellChat_Interactions.png", width=1000, height=1000)
-gg1_n
-dev.off()
 
-png(file="CellChat_Interactions_Weighted.png", width=1000, height=1000)
-gg2_n
-dev.off()
 
-gg1_m<-netVisual_heatmap(mergedCellChat)
+gg1_m<-netVisual_heatmap(mergedCellChat, font.size=6)
 gg2_m<-netVisual_heatmap(mergedCellChat, measure = "weight")
 
 png(file="CellChat_netHeatmap.png", width=1000, height=1000)
-gg1_m+gg2_m
+gg1_m
 dev.off()
 
 pos.dataset = "MDX"
@@ -116,14 +110,25 @@ gene.down <- extractGeneSubsetFromPair(net.down, mergedCellChat)
 
 
 pairLR.use.up = net.up[, "interaction_name", drop = F]
-gg1 <- netVisual_bubble(mergedCellChat, pairLR.use = pairLR.use.up, sources.use = 1:21, targets.use = 1:21, comparison = c(1, 2),  angle.x = 90, remove.isolate = T,title.name = paste0("Up-regulated signaling in ", names(object.list)[2]))
+gg1 <- netVisual_bubble(mergedCellChat, pairLR.use = pairLR.use.up, sources.use = 1:25, targets.use = 1:25, comparison = c(1, 2),  angle.x = 90, remove.isolate = T,title.name = paste0("Up-regulated signaling in ", names(object.list)[2]))
 pairLR.use.down = net.down[, "interaction_name", drop = F]
-gg2 <- netVisual_bubble(mergedCellChat, pairLR.use = pairLR.use.down, sources.use = 1:21, targets.use = 1:21, comparison = c(1, 2),  angle.x = 90, remove.isolate = T,title.name = paste0("Down-regulated signaling in ", names(object.list)[2]))
+gg2 <- netVisual_bubble(mergedCellChat, pairLR.use = pairLR.use.down, sources.use = 1:25, targets.use = 1:25, comparison = c(1, 2),  angle.x = 90, remove.isolate = T,title.name = paste0("Down-regulated signaling in ", names(object.list)[2]))
 #> Comparing communications on a merged object
 
 png(file="CellChat_netBubble.png", width=5000, height=1000)
 gg1 + gg2
 dev.off()
+
+
+png(file="CellChat_netBubble_mdx_up.png", width=5000, height=2000)
+netVisual_bubble(mergedCellChat, pairLR.use = pairLR.use.up, sources.use = 1:25, targets.use = 1:25, comparison = c(1, 2),  angle.x = 90, remove.isolate = T,title.name = paste0("Up-regulated signaling in ", names(object.list)[2]))
+dev.off()
+
+
+png(file="CellChat_netBubble_mdx_down.png", width=5000, height=1000)
+netVisual_bubble(mergedCellChat, pairLR.use = pairLR.use.down, sources.use = 1:25, targets.use = 1:25, comparison = c(1, 2),  angle.x = 90, remove.isolate = T,title.name = paste0("Down-regulated signaling in ", names(object.list)[2]))
+dev.off()
+
 
 
 png(file="CellChat_chord_mdx_up.png", width=2500, height=2500)
